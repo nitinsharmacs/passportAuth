@@ -33,6 +33,10 @@ class User {
 	static findUser(username){
 		return _db.db.collection('users').findOne({$or:[{username:username},{email:username}]});
 	}
+	//find user by Id
+	static findUserById(userId){
+		return _db.db.collection('users').findOne({_id:new mongodb.ObjectId(userId)});
+	}
 	// find user for registration
 	static findUserReg(username, email){
 		return _db.db.collection('users').findOne({$or:[{username:username}, {email:email}]});
@@ -40,6 +44,10 @@ class User {
 	// find user by facebook id
 	static findUserFb(fbId){
 		return _db.db.collection('users').findOne({"facebook.fbId":fbId});
+	}
+	// find user by googleId
+	static findUserGoogle(googleId){
+		return _db.db.collection('users').findOne({"google.googleId":googleId});
 	}
 	//find user by twitter id
 	static findUserTwitter(twitterId){

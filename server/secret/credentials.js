@@ -8,8 +8,8 @@ const credentials = {
 		clientSecret: process.env.GOOGLE_CONSUMER_SECRET
 	},
 	TWITTER:{
-		consumerKey: process.env.TWITTER_CONSUMER_KEY,
-		consumerSecret: process.env.TWITTER_CONSUMER_SECRET
+		clientID: process.env.TWITTER_CONSUMER_KEY,
+		clientSecret: process.env.TWITTER_CONSUMER_SECRET
 	}
 };
 

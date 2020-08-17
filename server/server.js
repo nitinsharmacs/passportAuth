@@ -1,6 +1,7 @@
 const server = require('express')();
 require('dotenv').config();
 const passport = require('passport');
+const bodyParser = require('body-parser');
 
 const passportConfig = require('./config/passport/passport');
 
@@ -8,6 +9,7 @@ const dbConnection = require('./util/database').dbConnection;
 
 //routes
 const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
 
 //CORS
 server.use((req, res, next)=>{
@@ -21,9 +23,12 @@ server.use((req, res, next)=>{
 	next();
 });
 
+server.use(bodyParser.json());
+
 server.use(passport.initialize());
 
 server.use('/auth', authRoutes);
+server.use('/user', userRoutes);
 
 server.use('/', (req, res)=>{
 	res.send('Server is runnig')

@@ -18,7 +18,7 @@ exports.localRegister = (req, res) => {
 	return res.status(201).json({message:"User Registered", status:201});
 };
 exports.fbLogin = (req, res) => {
-
+	console.log(req.user)
 	if(req.err){
 		console.log(req.err);
 	}
@@ -30,8 +30,8 @@ exports.fbLogin = (req, res) => {
 	}, process.env.JWT_KEY , {
 		expiresIn:'5h'
 	});
-	res.cookie('token',token, {secure:true, maxAge:5*3600*1000});
-	return res.redirect('http://localhost:3000');
+	res.cookie('token',token, {maxAge:5*3600*1000});
+	return res.redirect('http://localhost:3000/home');
 };
 exports.googleLogin = (req, res) => {
 	if(!req.user)
@@ -42,7 +42,8 @@ exports.googleLogin = (req, res) => {
 	}, process.env.JWT_KEY, {
 		expiresIn:'5h'
 	});
-	return res.status(200).json({message:"Google Login Successful", status:200});
+	res.cookie('token',token, {maxAge:5*3600*1000});
+	return res.redirect('http://localhost:3000/home');
 };
 exports.twitterLogin = (req, res) => {
 	if(!req.user)
@@ -53,5 +54,6 @@ exports.twitterLogin = (req, res) => {
 	}, process.env.JWT_KEY, {
 		expiresIn:'5h'
 	});
-	return res.status(200).json({message:"Twitter Login Successful", status:200});
+	res.cookie('token',token, {maxAge:5*3600*1000});
+	return res.redirect('http://localhost:3000/home');
 };
